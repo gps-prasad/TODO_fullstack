@@ -1,0 +1,54 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block content %}
+    <section class="vh-100 gradient-custom-2">
+        <div class="container justify-content-center py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-7 col-xl-5">
+    
+            <div class="card mask-custom rounded-5">
+                <div class="card-body p-4 text-white gradient-custom-2 shadow-lg rounded-5">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="form-row">
+                          <div class="form-group col-md-12">
+                            <label for="inputTodo">Todo</label>
+                            <input id="inputTodo" class="form-control" type="text" placeholder="description..." value="{{todo.description}}"  name="inputTodo" >
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-12">
+                            <label for="inputPriority">State</label>
+                            <select id="inputPriority" name="inputPriority" class="form-control">
+                              {% if todo.priority == 'High Priority' %}
+                                <option selected value="High Priority">High Priority</option>
+                              {% else %}
+                                <option value="High Priority">High Priority</option>
+                              {% endif %}
+                              {% if todo.priority == 'Medium Priority' %}
+                                <option selected value="Medium Priority">Medium Priority</option>
+                              {% else %}
+                                <option value="Medium Priority">Medium Priority</option>
+                              {% endif %}
+                              {% if todo.priority == 'Low Priority' %}
+                                <option selected value="Low Priority">Low Priority</option>
+                              {% else %}
+                                <option value="Low Priority">Low Priority</option>
+                              {% endif %}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+    
+            </div>
+        </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block content %}
+    <section class="vh-100 w-100 gradient-custom-2">
+        <div class="container py-5 h-100">
+            <div class="d-flex justify-content-end">
+                <a href="{% url 'logout' %}" class="btn btn-warning border-white text-white">Log Out</a>
+            </div>
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-12 col-xl-10">
+            <div class="card mask-custom rounded-5">
+                <div class="card-body p-4 text-center text-white gradient-custom-2 shadow-lg rounded-5">
+    
+                <div class="text-center pt-3 pb-2">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+                    alt="Check" width="60">
+                    <h2 class="my-4">Your Todo's List {{request.user}}</h2>
+                </div>
+                {% if total > 0 %}
+                <table class="table text-white mb-0">
+                    <thead>
+                    <tr>
+                        <th scope="col">Task</th>
+                        <th scope="col">Date Created</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for todo in todos %}
+                        <tr class="fw-normal">
+                            <td class="fst-{% if todo.completed == True %}italic text-decoration-line-through{% else %}normal fw-bold{% endif %}">{{ todo.description }}</td>
+                            <td class="align-middle">
+                                {{ todo.date_created }}
+                            </td>
+                            <td class="align-middle">
+                            <h6 class="mb-0"><span class="badge bg-{% if todo.priority == 'High Priority' %}danger{% elif todo.priority == 'Medium Priority' %}warning{% else %}success{% endif %}">{{todo.priority}}</span></h6>
+                            </td>
+                            <td class="align-middle">
+                            <a href="{% url 'completed' todo.id %}" data-mdb-toggle="tooltip" title="Done"><i
+                                class="fas fa-check fa-lg text-{% if todo.completed == True %}success{% else %}light{% endif %} me-3"></i></a>
+                            <a href="{% url 'edit' todo.id %}" data-mdb-toggle="tooltip" title="Edit"><i
+                                class="fas fa-edit fa-lg text-primary me-3"></i></a>
+                            <a href="{% url 'delete' todo.id %}" data-mdb-toggle="tooltip" title="Remove"><i
+                                class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <h3>No pending Tasks</h3>
+                {% endif %}  
+                <a href="{% url 'add' %}" class="btn gradient-custom-2 text-white border rounded-4 mt-3"><i class="fa-solid fa-plus me-2"></i>ADD TODO</a>    
+                </div>
+            </div>
+    
+            </div>
+        </div>
+        </div>
+    </section>
+
+{% endblock %}

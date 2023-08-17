@@ -1,0 +1,39 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block content %}
+    <section class="vh-100 gradient-custom-2">
+        <div class="container justify-content-center py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-7 col-xl-5">
+    
+            <div class="card mask-custom rounded-5">
+                <div class="card-body p-4 text-white gradient-custom-2 shadow-lg rounded-5">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="form-row">
+                          <div class="form-group col-md-12">
+                            <label for="inputUsername">UserName</label>
+                            <input type="text" class="form-control" id="inputUserName" name="UserName" placeholder="UserName...">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                              <label for="inputPassword">Password</label>
+                              <input type="text" class="form-control" id="inputPassword" name="Password" placeholder="Password...">
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-primary">SIGN IN</button>
+                            <a href="{% url 'register' %}" class="btn btn-success">SIGN UP</a>
+                        </div>
+                      </form>
+                </div>
+            </div>
+    
+            </div>
+        </div>
+        </div>
+    </section>
+
+{% endblock %}
